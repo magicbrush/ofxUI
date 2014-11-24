@@ -4,6 +4,29 @@
 #include "ofMain.h"
 #include "ofxUI.h"
 
+class ofxSDTile;
+class ofxSDRectFrame;
+class ofxSDCornerEdgeFill;
+
+class Skin_RectFill
+{
+public:
+	Skin_RectFill(
+		string imgCorner, 
+		string imgEdge, 
+		string imgFill);
+	~Skin_RectFill();
+
+	ofPtr<ofImage> ICorner;
+	ofPtr<ofImage> IEdge;
+	ofPtr<ofImage> IFill;
+	ofPtr<ofxSDTile> TileEdge;
+	ofPtr<ofxSDTile> TileFill;
+	ofPtr<ofxSDCornerEdgeFill> Skin;
+};
+
+
+
 class ofApp : public ofBaseApp 
 {
 	public:
@@ -24,10 +47,16 @@ class ofApp : public ofBaseApp
 	
 	ofxUISuperCanvas *gui0;
 	ofxUISuperCanvas *gui1;
-    
+
+	// skin
+	ofPtr<Skin_RectFill> SkinCan;	
+	ofPtr<Skin_RectFill> SkinSliderFill;
+	ofPtr<ofImage> ISliderOutline;
+	ofPtr<ofxSDRectFrame> SkinSliderOutline;
+	
 	void guiEvent(ofxUIEventArgs &e);
 
-    bool drawPadding;
+	bool drawPadding;
 	float red, green, blue;    
 };
 

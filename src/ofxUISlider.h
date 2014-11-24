@@ -30,87 +30,93 @@ template<typename T>
 class ofxUISlider_ : public ofxUIWidgetWithLabel
 {
 public:
-    ofxUISlider_();
-    ofxUISlider_(string _name, T _min, T _max, T _value, float w, float h, float x = 0, float y = 0);
-    ofxUISlider_(string _name, T _min, T _max, T *_value, float w, float h, float x = 0, float y = 0);
-    ~ofxUISlider_();
-    void setKind();
-    void setOrientation(float w, float h);
-    virtual void init(string _name, T _min, T _max, T *_value, float w, float h, float x, float y);
-    
-    virtual void update();
-    
-    virtual void setDrawPadding(bool _draw_padded_rect);
-    virtual void setDrawPaddingOutline(bool _draw_padded_rect_outline);
-    virtual void drawBack();
-    virtual void drawOutline();
-    virtual void drawOutlineHighlight();
-    virtual void drawFill();
-    virtual void drawFillHighlight();
-    
-    void mouseMoved(int x, int y);
-    void mouseDragged(int x, int y, int button);
-    void mousePressed(int x, int y, int button);
-    void mouseReleased(int x, int y, int button);
-    
-    void keyPressed(int key);
-    void keyReleased(int key);
-    void windowResized(int w, int h);
-    
-    bool getSetClampValue();
-    void setClampValue(bool _bClampValue);
-    
-    ofxUISlider_<T>* enableSticky(bool _bSticky);
-    ofxUISlider_<T>* setStickyValue(double _stickyValue);
-    double getStickyValue();
-    
-    T getIncrement();
-    void setIncrement(T _increment);
+	ofxUISlider_();
+	ofxUISlider_(string _name, T _min, T _max, T _value, float w, float h, float x = 0, float y = 0);
+	ofxUISlider_(string _name, T _min, T _max, T *_value, float w, float h, float x = 0, float y = 0);
+	~ofxUISlider_();
+	void setKind();
+	void setOrientation(float w, float h);
+	virtual void init(string _name, T _min, T _max, T *_value, float w, float h, float x, float y);
 	
-    virtual void input(float x, float y);
-    void updateValueRef();
+	virtual void update();
+	
+	virtual void setDrawPadding(bool _draw_padded_rect);
+	virtual void setDrawPaddingOutline(bool _draw_padded_rect_outline);
+	virtual void drawBack();
+	virtual void drawOutline();
+	virtual void drawOutlineHighlight();
+	virtual void drawFill();
+	virtual void drawFillHighlight();
+	
+	void mouseMoved(int x, int y);
+	void mouseDragged(int x, int y, int button);
+	void mousePressed(int x, int y, int button);
+	void mouseReleased(int x, int y, int button);
+	
+	void keyPressed(int key);
+	void keyReleased(int key);
+	void windowResized(int w, int h);
+	
+	bool getSetClampValue();
+	void setClampValue(bool _bClampValue);
+	
+	ofxUISlider_<T>* enableSticky(bool _bSticky);
+	ofxUISlider_<T>* setStickyValue(double _stickyValue);
+	double getStickyValue();
+	
+	T getIncrement();
+	void setIncrement(T _increment);
+	
+	virtual void input(float x, float y);
+	void updateValueRef();
 	virtual void updateLabel();
-    virtual void stateChange();
+	virtual void stateChange();
 	
-    void setValue(T _value);
+	void setValue(T _value);
 	T getValue();
-    T getNormalizedValue();
+	T getNormalizedValue();
 	
-    float getPercentValue();
+	float getPercentValue();
 	T getScaledValue();
 
-    void setLabelPrecision(int _precision);
-    
+	void setLabelPrecision(int _precision);
+	
 	virtual void setParent(ofxUIWidget *_parent);
-    
-    void setMax(T _max, bool bKeepValueTheSame = false);
-    T getMax();
-    
-    void setMin(T _min, bool bKeepValueTheSame = false);
-    T getMin();
-    
-    ofxUIVec2f getMaxAndMin();
-    void setMaxAndMin(T _max, T _min, bool bKeepValueTheSame = false);
-    
-    bool isDraggable();
-    virtual bool hasState(){ return true; };
+	
+	void setMax(T _max, bool bKeepValueTheSame = false);
+	T getMax();
+	
+	void setMin(T _min, bool bKeepValueTheSame = false);
+	T getMin();
+	
+	ofxUIVec2f getMaxAndMin();
+	void setMaxAndMin(T _max, T _min, bool bKeepValueTheSame = false);
+	
+	bool isDraggable();
+	virtual bool hasState(){ return true; };
 #ifndef OFX_UI_NO_XML
-    virtual void saveState(ofxXmlSettings *XML);
-    virtual void loadState(ofxXmlSettings *XML);
+	virtual void saveState(ofxXmlSettings *XML);
+	virtual void loadState(ofxXmlSettings *XML);
 #endif    
-    
+
+private:
+	ofRectangle getDrawRect();
+	void transform();
+	void drawSkinRect( ofPtr<ofBaseDraws> &pDraw, ofRectangle &RFill );
+	void drawSkinInDrawRect();
+	
 protected:
-    bool bSticky;
-    double stickyValue;
-    bool bRoundedToNearestInt;
-    bool bClampValue;
-    double value, increment;
-    T *valueRef;
-    bool useReference;
+	bool bSticky;
+	double stickyValue;
+	bool bRoundedToNearestInt;
+	bool bClampValue;
+	double value, increment;
+	T *valueRef;
+	bool useReference;
 	T max, min;
-    int labelPrecision;
-    int orientation;
-    string valueString;
+	int labelPrecision;
+	int orientation;
+	string valueString;
 };
 
 typedef ofxUISlider_<int> ofxUIIntSlider;

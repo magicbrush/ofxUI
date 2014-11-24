@@ -218,7 +218,7 @@ void ofxUIWidget::drawOutline() {
 	if(draw_outline) {
 		ofxUINoFill();
 		ofxUISetColor(color_outline);
-		drawComponent(skin_outLine,rect);		
+		drawComponent(skin_outline,rect);		
 	}
 }
 
@@ -226,7 +226,7 @@ void ofxUIWidget::drawOutlineHighlight() {
 	if(draw_outline_highlight) {
 		ofxUINoFill();
 		ofxUISetColor(color_outline_highlight);
-		drawComponent(skin_outLine_highlight,rect);
+		drawComponent(skin_outline_highlight,rect);
 	}
 }
 

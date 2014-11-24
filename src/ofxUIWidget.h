@@ -233,12 +233,12 @@ protected:
 	//--------- skin ---------------//
 	// 增加了皮肤功能，
 	// 在之前所有的draw*()函数中增加了绘制皮肤的逻辑分支
-private:
+protected:
 	ofPtr<ofBaseDraws> skin_padded;	
 	ofPtr<ofBaseDraws> skin_padded_outline;
 	ofPtr<ofBaseDraws> skin_back;	
-	ofPtr<ofBaseDraws> skin_outLine;	
-	ofPtr<ofBaseDraws> skin_outLine_highlight;
+	ofPtr<ofBaseDraws> skin_outline;	
+	ofPtr<ofBaseDraws> skin_outline_highlight;
 	ofPtr<ofBaseDraws> skin_fill;
 	ofPtr<ofBaseDraws> skin_fill_highlight;
 
@@ -249,8 +249,10 @@ public:
 	void set_skin_padded_outline(ofPtr<ofBaseDraws> val) { skin_padded_outline = val; }
 	ofPtr<ofBaseDraws> get_skin_back() const { return skin_back; }
 	void set_skin_back(ofPtr<ofBaseDraws> val) { skin_back = val; }
-	ofPtr<ofBaseDraws> get_skin_outLine_highlight() const { return skin_outLine_highlight; }
-	void set_skin_outLine_highlight(ofPtr<ofBaseDraws> val) { skin_outLine_highlight = val; }
+	ofPtr<ofBaseDraws> get_skin_outline() const { return skin_outline; }
+	void set_skin_outline(ofPtr<ofBaseDraws> val) { skin_outline = val; }
+	ofPtr<ofBaseDraws> get_skin_outLine_highlight() const { return skin_outline_highlight; }
+	void set_skin_outLine_highlight(ofPtr<ofBaseDraws> val) { skin_outline_highlight = val; }
 	ofPtr<ofBaseDraws> get_skin_fill() const { return skin_fill; }
 	void set_skin_fill(ofPtr<ofBaseDraws> val) { skin_fill = val; }
 	ofPtr<ofBaseDraws> get_skin_fill_highlight() const { return skin_fill_highlight; }
