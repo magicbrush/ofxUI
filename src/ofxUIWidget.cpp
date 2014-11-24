@@ -57,20 +57,20 @@ bKeyHit(false),
 triggerType(OFX_UI_TRIGGER_ALL)
 {
 #ifdef OFX_UI_TARGET_TOUCH
-    touchId = -1;
+	touchId = -1;
 #endif
 }
 
 ofxUIWidget::~ofxUIWidget() {
-    if(rect != NULL)
-    {
-        delete rect;
-    }
-    if(paddedRect != NULL)
-    {
-        delete paddedRect;
-    }
-    keyBindings.clear();
+	if(rect != NULL)
+	{
+		delete rect;
+	}
+	if(paddedRect != NULL)
+	{
+		delete paddedRect;
+	}
+	keyBindings.clear();
 }
 
 // Mitchell Nordine - custom copy constructor for heap allocation handling.
@@ -107,82 +107,82 @@ bKeyHit(other.bKeyHit),
 keyBindings(other.keyBindings),
 triggerType(OFX_UI_TRIGGER_ALL)
 {
-    if (other.rect) {
-        initRect(other.rect->getX(), other.rect->getY(), other.rect->getWidth(), other.rect->getHeight());
-    }
-    else {
-        initRect();
-    }
+	if (other.rect) {
+		initRect(other.rect->getX(), other.rect->getY(), other.rect->getWidth(), other.rect->getHeight());
+	}
+	else {
+		initRect();
+	}
 }
 
 // Mitchell Nordine - custom assignment operator for heap allocation handling.
 ofxUIWidget& ofxUIWidget::operator=(const ofxUIWidget &other) {
-    name = other.name;
-    kind = other.kind;
-    visible = other.visible;
-    ID = other.ID;
-    hit = other.hit;
-    state = other.state;
-    embedded = other.embedded;
-    modal = other.modal;
-    draw_back = other.draw_back;
-    draw_outline = other.draw_outline;
-    draw_outline_highlight = other.draw_outline_highlight;
-    draw_fill = other.draw_fill;
-    draw_fill_highlight = other.draw_fill_highlight;
-    color_back = other.color_back;
-    color_outline = other.color_outline;
-    color_outline_highlight = other.color_outline_highlight;
-    color_fill = other.color_fill;
-    color_fill_highlight = other.color_fill_highlight;
-    padding = other.padding;
-    draw_padded_rect = other.draw_padded_rect;
-    draw_padded_rect_outline = other.draw_padded_rect_outline;
-    triggerType = other.triggerType;
-    bKeyHit = other.bKeyHit;
-    if (other.rect) {
-        initRect(other.rect->getX(), other.rect->getY(), other.rect->getWidth(), other.rect->getHeight());
-    }
-    else {
-        initRect();
-    }
-    return *this;
+	name = other.name;
+	kind = other.kind;
+	visible = other.visible;
+	ID = other.ID;
+	hit = other.hit;
+	state = other.state;
+	embedded = other.embedded;
+	modal = other.modal;
+	draw_back = other.draw_back;
+	draw_outline = other.draw_outline;
+	draw_outline_highlight = other.draw_outline_highlight;
+	draw_fill = other.draw_fill;
+	draw_fill_highlight = other.draw_fill_highlight;
+	color_back = other.color_back;
+	color_outline = other.color_outline;
+	color_outline_highlight = other.color_outline_highlight;
+	color_fill = other.color_fill;
+	color_fill_highlight = other.color_fill_highlight;
+	padding = other.padding;
+	draw_padded_rect = other.draw_padded_rect;
+	draw_padded_rect_outline = other.draw_padded_rect_outline;
+	triggerType = other.triggerType;
+	bKeyHit = other.bKeyHit;
+	if (other.rect) {
+		initRect(other.rect->getX(), other.rect->getY(), other.rect->getWidth(), other.rect->getHeight());
+	}
+	else {
+		initRect();
+	}
+	return *this;
 }
 
 void ofxUIWidget::initRect(float x, float y, float w, float h) {
-    if(rect != NULL) {
-        delete rect;
-    }
-    rect = new ofxUIRectangle(x,y,w,h);
-    initPaddingRect();
+	if(rect != NULL) {
+		delete rect;
+	}
+	rect = new ofxUIRectangle(x,y,w,h);
+	initPaddingRect();
 }
 
 void ofxUIWidget::initPaddingRect() {
-    if(paddedRect != NULL) {
-        delete paddedRect;
-    }
-    paddedRect = new ofxUIRectangle(-padding, -padding, rect->getWidth()+padding*2.0, rect->getHeight()+padding*2.0);
-    paddedRect->setParent(rect);
-    calculatePaddingRect();
+	if(paddedRect != NULL) {
+		delete paddedRect;
+	}
+	paddedRect = new ofxUIRectangle(-padding, -padding, rect->getWidth()+padding*2.0, rect->getHeight()+padding*2.0);
+	paddedRect->setParent(rect);
+	calculatePaddingRect();
 }
 
 void ofxUIWidget::calculatePaddingRect() {
-    float xMax = rect->getWidth();
-    float yMax = rect->getHeight();
-    vector<ofxUIWidget *>::iterator it = embeddedWidgets.begin();
-    vector<ofxUIWidget *>::iterator eit = embeddedWidgets.end();
-    for(; it != eit; ++it) {
-        if((*it)->isVisible()) {
-            ofxUIRectangle *r = (*it)->getRect();
-            r->getMaxX() > xMax ? (xMax = r->getMaxX()) : NULL;
-            r->getMaxY() > yMax ? (yMax = r->getMaxY()) : NULL;
-        }
-    }
-    paddedRect->set(-padding, -padding, xMax+padding*2.0, yMax+padding*2.0);
+	float xMax = rect->getWidth();
+	float yMax = rect->getHeight();
+	vector<ofxUIWidget *>::iterator it = embeddedWidgets.begin();
+	vector<ofxUIWidget *>::iterator eit = embeddedWidgets.end();
+	for(; it != eit; ++it) {
+		if((*it)->isVisible()) {
+			ofxUIRectangle *r = (*it)->getRect();
+			r->getMaxX() > xMax ? (xMax = r->getMaxX()) : NULL;
+			r->getMaxY() > yMax ? (yMax = r->getMaxY()) : NULL;
+		}
+	}
+	paddedRect->set(-padding, -padding, xMax+padding*2.0, yMax+padding*2.0);
 }
 
 void ofxUIWidget::setup() {
-    //Custom Setup for Widgets
+	//Custom Setup for Widgets
 }
 
 void ofxUIWidget::update() {
@@ -190,337 +190,337 @@ void ofxUIWidget::update() {
 }
 
 void ofxUIWidget::draw() {
-    ofxUIPushStyle();
-    
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
-    drawPadded();
-    drawPaddedOutline();
-    drawBack();
-    drawOutline();
-    drawOutlineHighlight();
-    drawFill();
-    drawFillHighlight();
-    
-    ofxUIPopStyle();
+	ofxUIPushStyle();
+	
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
+	drawPadded();
+	drawPaddedOutline();
+	drawBack();
+	drawOutline();
+	drawOutlineHighlight();
+	drawFill();
+	drawFillHighlight();
+	
+	ofxUIPopStyle();
 }
 
 void ofxUIWidget::drawBack() {
-    if(draw_back) {
-        ofxUIFill();
-        ofxUISetColor(color_back);
-        rect->draw();
-    }
+	if(draw_back) {
+		ofxUIFill();
+		ofxUISetColor(color_back);		
+		drawComponent(skin_back, rect);
+	}
 }
 
 void ofxUIWidget::drawOutline() {
-    if(draw_outline) {
-        ofxUINoFill();
-        ofxUISetColor(color_outline);
-        rect->draw();
-    }
+	if(draw_outline) {
+		ofxUINoFill();
+		ofxUISetColor(color_outline);
+		drawComponent(skin_outLine,rect);		
+	}
 }
 
 void ofxUIWidget::drawOutlineHighlight() {
-    if(draw_outline_highlight) {
-        ofxUINoFill();
-        ofxUISetColor(color_outline_highlight);
-        rect->draw();
-    }
+	if(draw_outline_highlight) {
+		ofxUINoFill();
+		ofxUISetColor(color_outline_highlight);
+		drawComponent(skin_outLine_highlight,rect);
+	}
 }
 
 void ofxUIWidget::drawFill() {
-    if(draw_fill) {
-        ofxUIFill();
-        ofxUISetColor(color_fill);
-        rect->draw();
-    }
+	if(draw_fill) {
+		ofxUIFill();
+		ofxUISetColor(color_fill);
+		drawComponent(skin_fill,rect);
+	}
 }
 
 void ofxUIWidget::drawFillHighlight() {
-    if(draw_fill_highlight) {
-        ofxUIFill();
-        ofxUISetColor(color_fill_highlight);
-        rect->draw();
-    }
+	if(draw_fill_highlight) {
+		ofxUIFill();
+		ofxUISetColor(color_fill_highlight);
+		drawComponent(skin_fill_highlight,rect);
+	}
 }
 
 void ofxUIWidget::drawPadded() {
-    if(draw_padded_rect && !embedded) {
-        ofxUIFill();
-        ofxUISetColor(color_padded_rect);
-        paddedRect->draw();
-    }
+	if(draw_padded_rect && !embedded) {
+		ofxUIFill();
+		ofxUISetColor(color_padded_rect);
+		drawComponent(skin_padded,paddedRect);
+	}
 }
 
 void ofxUIWidget::drawPaddedOutline() {
-    if(draw_padded_rect_outline && !embedded) {
-        ofxUINoFill();
-        ofxUISetColor(color_padded_rect_outline);
-        paddedRect->draw();
-    }
+	if(draw_padded_rect_outline && !embedded) {
+		ofxUINoFill();
+		ofxUISetColor(color_padded_rect_outline);
+		drawComponent(skin_padded_outline,paddedRect);
+	}
 }
 
 #ifdef OFX_UI_TARGET_TOUCH          //iOS Mode
 void ofxUIWidget::touchDown(float x, float y, int id) {
-    if(touchId == -1) {
-        this->mousePressed(x, y, 0);
-        if(hit) {
-            touchId = id;
-        }
-    }
+	if(touchId == -1) {
+		this->mousePressed(x, y, 0);
+		if(hit) {
+			touchId = id;
+		}
+	}
 }
 
 void ofxUIWidget::touchMoved(float x, float y, int id) {
-    if(touchId == id) {
-        this->mouseDragged(x, y, 0);
-    }
+	if(touchId == id) {
+		this->mouseDragged(x, y, 0);
+	}
 }
 
 void ofxUIWidget::touchUp(float x, float y, int id) {
-    if(touchId == id) {
-        this->mouseReleased(x, y, 0);
-        touchId = -1;
-    }
+	if(touchId == id) {
+		this->mouseReleased(x, y, 0);
+		touchId = -1;
+	}
 }
 
 void ofxUIWidget::touchCancelled(float x, float y, int id) {
-    if(touchId == id) {
-        this->mouseReleased(x, y, 0);
-        touchId = -1;
-    }
+	if(touchId == id) {
+		this->mouseReleased(x, y, 0);
+		touchId = -1;
+	}
 }
 #endif
 
 void ofxUIWidget::setTriggerType(ofxUITriggerType _triggerType) {
-    triggerType = _triggerType;
+	triggerType = _triggerType;
 }
 
 ofxUITriggerType ofxUIWidget::getTriggerType() {
-    return triggerType;
+	return triggerType;
 }
 
 void ofxUIWidget::setParent(ofxUIWidget *_parent) {
-    parent = _parent;
+	parent = _parent;
 }
 
 void ofxUIWidget::setRectParent(ofxUIRectangle *_prect) {
-    rect->setParent(_prect);
+	rect->setParent(_prect);
 }
 
 ofxUIWidget *ofxUIWidget::getParent() {
-    return parent;
+	return parent;
 }
 
 ofxUIRectangle* ofxUIWidget::getRect() {
-    return rect;
+	return rect;
 }
 
 void ofxUIWidget::setName(string _name) {
-    name = string(_name);
+	name = string(_name);
 }
 
 void ofxUIWidget::setState(int _state) {
-    state = _state;
+	state = _state;
 }
 
 void ofxUIWidget::setDrawPadding(bool _draw_padded_rect) {
-    draw_padded_rect = _draw_padded_rect;
+	draw_padded_rect = _draw_padded_rect;
 }
 
 void ofxUIWidget::setDrawPaddingOutline(bool _draw_padded_rect_outline) {
-    draw_padded_rect_outline = _draw_padded_rect_outline;
+	draw_padded_rect_outline = _draw_padded_rect_outline;
 }
 
 void ofxUIWidget::setDrawBack(bool _draw_back) {
-    draw_back = _draw_back;
+	draw_back = _draw_back;
 }
 
 void ofxUIWidget::setDrawOutline(bool _draw_outline) {
-    draw_outline = _draw_outline;
+	draw_outline = _draw_outline;
 }
 
 void ofxUIWidget::setDrawFill(bool _draw_fill) {
-    draw_fill = _draw_fill;
+	draw_fill = _draw_fill;
 }
 
 void ofxUIWidget::setDrawFillHighLight(bool _draw_fill_highlight) {
-    draw_fill_highlight = _draw_fill_highlight;
+	draw_fill_highlight = _draw_fill_highlight;
 }
 
 void ofxUIWidget::setDrawOutlineHighLight(bool _draw_outline_hightlight) {
-    draw_outline_highlight = _draw_outline_hightlight;
+	draw_outline_highlight = _draw_outline_hightlight;
 }
 
 bool ofxUIWidget::getDrawPadding() {
-    return draw_padded_rect;
+	return draw_padded_rect;
 }
 
 bool ofxUIWidget::getDrawPaddingOutline() {
-    return draw_padded_rect_outline;
+	return draw_padded_rect_outline;
 }
 
 bool ofxUIWidget::getDrawBack() {
-    return draw_back;
+	return draw_back;
 }
 
 bool ofxUIWidget::getDrawOutline() {
-    return draw_outline;
+	return draw_outline;
 }
 
 bool ofxUIWidget::getDrawFill() {
-    return draw_fill;
+	return draw_fill;
 }
 
 bool ofxUIWidget::getDrawFillHighLight() {
-    return draw_fill_highlight;
+	return draw_fill_highlight;
 }
 
 bool ofxUIWidget::getDrawOutlineHighLight() {
-    return draw_outline_highlight;
+	return draw_outline_highlight;
 }
 
 void ofxUIWidget::setColorBack(ofxUIColor _color_back) {
-    color_back = _color_back;
+	color_back = _color_back;
 }
 
 void ofxUIWidget::setColorOutline(ofxUIColor _color_outline) {
-    color_outline = _color_outline;
+	color_outline = _color_outline;
 }
 
 void ofxUIWidget::setColorOutlineHighlight(ofxUIColor _color_outline_highlight) {
-    color_outline_highlight = _color_outline_highlight;
+	color_outline_highlight = _color_outline_highlight;
 }
 
 void ofxUIWidget::setColorFill(ofxUIColor _color_fill) {
-    color_fill = _color_fill;
+	color_fill = _color_fill;
 }
 
 void ofxUIWidget::setColorFillHighlight(ofxUIColor _color_fill_highlight) {
-    color_fill_highlight = _color_fill_highlight;
+	color_fill_highlight = _color_fill_highlight;
 }
 
 void ofxUIWidget::setColorPadded(ofxUIColor _color_padded_rect) {
-    color_padded_rect = _color_padded_rect;
+	color_padded_rect = _color_padded_rect;
 }
 
 void ofxUIWidget::setColorPaddedOutline(ofxUIColor _color_padded_rect_outline) {
-    color_padded_rect_outline = _color_padded_rect_outline;
+	color_padded_rect_outline = _color_padded_rect_outline;
 }
 
 ofxUIColor& ofxUIWidget::getColorPadded() {
-    return color_padded_rect;
+	return color_padded_rect;
 }
 
 ofxUIColor& ofxUIWidget::getColorPaddedOutline() {
-    return color_padded_rect_outline;
+	return color_padded_rect_outline;
 }
 
 ofxUIColor& ofxUIWidget::getColorBack() {
-    return color_back;
+	return color_back;
 }
 
 ofxUIColor& ofxUIWidget::getColorOutline() {
-    return color_outline;
+	return color_outline;
 }
 
 ofxUIColor& ofxUIWidget::getColorOutlineHighlight() {
-    return color_outline_highlight;
+	return color_outline_highlight;
 }
 
 ofxUIColor& ofxUIWidget::getColorFill() {
-    return color_fill;
+	return color_fill;
 }
 
 ofxUIColor& ofxUIWidget::getColorFillHighlight() {
-    return color_fill_highlight;
+	return color_fill_highlight;
 }
 
 void ofxUIWidget::setKind(ofxUIWidgetType _kind) {
-    kind = _kind;
+	kind = _kind;
 }
 
 ofxUIWidgetType ofxUIWidget::getKind() {
-    return kind;
+	return kind;
 }
 
 void ofxUIWidget::setFont(ofxUIFont *_font) {
-    font = _font;
+	font = _font;
 }
 
 void ofxUIWidget::setVisible(bool _visible) {
-    visible = _visible;
+	visible = _visible;
 }
 
 bool ofxUIWidget::isVisible() {
-    return visible;
+	return visible;
 }
 
 void ofxUIWidget::toggleVisible() {
-    visible =! visible;
+	visible =! visible;
 }
 
 bool ofxUIWidget::isHit(float x, float y) {
-    if(visible) {
-        return rect->inside(x, y);
-    }
-    else {
-        return false;
-    }
+	if(visible) {
+		return rect->inside(x, y);
+	}
+	else {
+		return false;
+	}
 }
 
 string& ofxUIWidget::getName() {
-    return name;
+	return name;
 }
 
 void ofxUIWidget::triggerEvent(ofxUIWidget *child) {
-    if(parent != NULL) {
-        parent->triggerEvent(child);
-    }
+	if(parent != NULL) {
+		parent->triggerEvent(child);
+	}
 }
 
 void ofxUIWidget::triggerSelf() {
-    if(parent != NULL) {
-        parent->triggerEvent(this);
-    }
+	if(parent != NULL) {
+		parent->triggerEvent(this);
+	}
 }
 
 void ofxUIWidget::setPadding(float _padding) {
-    padding = _padding;
-    calculatePaddingRect();
+	padding = _padding;
+	calculatePaddingRect();
 }
 
 float ofxUIWidget::getPadding() {
-    return padding;
+	return padding;
 }
 
 ofxUIRectangle * ofxUIWidget::getPaddingRect() {
-    return paddedRect;
+	return paddedRect;
 }
 
 void ofxUIWidget::stateChange() {
-    
+	
 }
 
 bool ofxUIWidget::isDraggable() {
-    return false;
+	return false;
 }
 
 bool ofxUIWidget::isEmbedded() {
-    return embedded;
+	return embedded;
 }
 
 void ofxUIWidget::setEmbedded(bool _embedded) {
-    embedded = _embedded;
+	embedded = _embedded;
 }
 
 void ofxUIWidget::setID(int _id) {
-    ID = _id;
+	ID = _id;
 }
 
 int ofxUIWidget::getID() {
-    return ID;
+	return ID;
 }
 
 //void ofxUIWidget::positionWidget(ofxUIWidget *widget)
@@ -563,124 +563,139 @@ void ofxUIWidget::addWidget(ofxUIWidget *widget) {
 }
 
 void ofxUIWidget::removeWidget(ofxUIWidget *widget) {
-    
+	
 }
 
 bool ofxUIWidget::hasLabel() {
-    return false;
+	return false;
 }
 
 bool ofxUIWidget::isModal() {
-    return modal;
+	return modal;
 }
 
 void ofxUIWidget::setModal(bool _modal) {
-    modal = _modal;
-    if(parent != NULL) {
-        if(modal) {
-            parent->addModalWidget(this);
-        }
-        else {
-            parent->removeModalWidget(this);
-        }
-    }
+	modal = _modal;
+	if(parent != NULL) {
+		if(modal) {
+			parent->addModalWidget(this);
+		}
+		else {
+			parent->removeModalWidget(this);
+		}
+	}
 }
 
 void ofxUIWidget::addModalWidget(ofxUIWidget *widget) {
-    if(parent != NULL) {
-        parent->addModalWidget(widget);
-    }
+	if(parent != NULL) {
+		parent->addModalWidget(widget);
+	}
 }
 
 void ofxUIWidget::removeModalWidget(ofxUIWidget *widget) {
-    if(parent != NULL) {
-        parent->removeModalWidget(widget);
-    }
+	if(parent != NULL) {
+		parent->removeModalWidget(widget);
+	}
 }
 
 void ofxUIWidget::addEmbeddedWidget(ofxUIWidget *widget) {
-    widget->setEmbedded(true);
-    embeddedWidgets.push_back(widget);
+	widget->setEmbedded(true);
+	embeddedWidgets.push_back(widget);
 }
 
 int ofxUIWidget::getEmbeddedWidgetsSize() {
-    return embeddedWidgets.size();
+	return embeddedWidgets.size();
 }
 
 ofxUIWidget *ofxUIWidget::getEmbeddedWidget(int index) {
-    return embeddedWidgets[index%embeddedWidgets.size()];
+	return embeddedWidgets[index%embeddedWidgets.size()];
 }
 
 void ofxUIWidget::clearEmbeddedWidgets() {
-    embeddedWidgets.clear();        //does not deallocate widgets, just deletes the pointers and sets the size to zero
+	embeddedWidgets.clear();        //does not deallocate widgets, just deletes the pointers and sets the size to zero
 }
 
 ofxUIWidget *ofxUIWidget::getCanvasParent() {
-    bool notFoundParentCanvas = true;
-    ofxUIWidget *parent = this->getParent();
-    if(parent != NULL) {
-        while (notFoundParentCanvas) {
-            int _kind = parent->getKind();
-            if( _kind == OFX_UI_WIDGET_CANVAS || _kind == OFX_UI_WIDGET_SCROLLABLECANVAS || _kind == OFX_UI_WIDGET_SUPERCANVAS || _kind  ==OFX_UI_WIDGET_TABBAR) {
-                notFoundParentCanvas = false;
-                return parent;
-            }
-            else {
-                parent = parent->getParent();
-                if(parent == NULL) {
-                    return NULL; 
-                }
-            }
-        }
-    }
-    else
-    {
-        int _kind = getKind();
-        if( _kind == OFX_UI_WIDGET_CANVAS || _kind == OFX_UI_WIDGET_SCROLLABLECANVAS || _kind == OFX_UI_WIDGET_SUPERCANVAS || _kind == OFX_UI_WIDGET_TABBAR) {
-            return this;
-        }
-    }
-    return NULL;
+	bool notFoundParentCanvas = true;
+	ofxUIWidget *parent = this->getParent();
+	if(parent != NULL) {
+		while (notFoundParentCanvas) {
+			int _kind = parent->getKind();
+			if( _kind == OFX_UI_WIDGET_CANVAS || _kind == OFX_UI_WIDGET_SCROLLABLECANVAS || _kind == OFX_UI_WIDGET_SUPERCANVAS || _kind  ==OFX_UI_WIDGET_TABBAR) {
+				notFoundParentCanvas = false;
+				return parent;
+			}
+			else {
+				parent = parent->getParent();
+				if(parent == NULL) {
+					return NULL; 
+				}
+			}
+		}
+	}
+	else
+	{
+		int _kind = getKind();
+		if( _kind == OFX_UI_WIDGET_CANVAS || _kind == OFX_UI_WIDGET_SCROLLABLECANVAS || _kind == OFX_UI_WIDGET_SUPERCANVAS || _kind == OFX_UI_WIDGET_TABBAR) {
+			return this;
+		}
+	}
+	return NULL;
 }
 
 bool ofxUIWidget::hasState()
 {
-    return false;
+	return false;
 }
 
 bool ofxUIWidget::getIsBindedToKey(int key)
 {
-    map<int,bool>::iterator it = keyBindings.find(key);
-    if(it != keyBindings.end() && it->second)
-    {
-        return true;
-    }
-    return false;
+	map<int,bool>::iterator it = keyBindings.find(key);
+	if(it != keyBindings.end() && it->second)
+	{
+		return true;
+	}
+	return false;
 }
 
 void ofxUIWidget::bindToKey(int key)
 {
-    keyBindings[key] = true;
+	keyBindings[key] = true;
 }
 
 void ofxUIWidget::unbindToKey(int key)
 {
-    keyBindings[key] = false;
+	keyBindings[key] = false;
 }
 
 void ofxUIWidget::unbindAllKeys()
 {
-    keyBindings.clear();
+	keyBindings.clear();
 }
 
 #ifndef OFX_UI_NO_XML
 
 void ofxUIWidget::saveState(ofxXmlSettings *XML) {
-    
+	
 }
 
 void ofxUIWidget::loadState(ofxXmlSettings *XML) {
-    
+	
+}
+
+void ofxUIWidget::drawComponent( ofPtr<ofBaseDraws> &pDraw, ofxUIRectangle* r )
+{
+	if(pDraw.use_count()>0)
+	{
+		ofPushMatrix();
+		ofRectangle R = r->getAbsoluteRect();
+		pDraw->draw(R);
+		ofPopMatrix();
+	}
+	else
+	{
+		r->draw();
+	}
 }
 
 #endif

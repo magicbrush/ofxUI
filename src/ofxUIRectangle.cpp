@@ -26,237 +26,255 @@
 
 ofxUIRectangle::ofxUIRectangle()
 {
-    x = y = width = height = halfheight = halfwidth = 0.0f;
-    setParent(NULL);
+	x = y = width = height = halfheight = halfwidth = 0.0f;
+	setParent(NULL);
 }
 
 ofxUIRectangle::ofxUIRectangle(float _x, float _y, float _w, float _h)
 {
-    x = _x;
-    y = _y;
-    width = _w;
-    halfwidth = width*.5;
-    height = _h;
-    halfheight = height*.5;
-    setParent(NULL);
+	x = _x;
+	y = _y;
+	width = _w;
+	halfwidth = width*.5;
+	height = _h;
+	halfheight = height*.5;
+	setParent(NULL);
 }
 
 ofxUIRectangle::ofxUIRectangle(ofxUIRectangle const & r)
 {
-    x = r.x;
-    y = r.y;
-    width = r.width;
-    halfwidth = width*.5;
-    height = r.height;
-    halfheight = height*.5;
-    setParent(NULL);
+	x = r.x;
+	y = r.y;
+	width = r.width;
+	halfwidth = width*.5;
+	height = r.height;
+	halfheight = height*.5;
+	setParent(NULL);
 }
 
 void ofxUIRectangle::set(float px, float py, float w, float h)
 {
-    x		= px;
-    y		= py;
-    width	= w;
-    height	= h;
-    halfwidth = width*.5;
-    halfheight = height*.5;
+	x		= px;
+	y		= py;
+	width	= w;
+	height	= h;
+	halfwidth = width*.5;
+	halfheight = height*.5;
 }
 
 void ofxUIRectangle::setX(float px)
 {
-    x = px;
+	x = px;
 }
 
 void ofxUIRectangle::setY(float py)
 {
-    y = py;
+	y = py;
 }
 
 void ofxUIRectangle::setParent(ofxUIRectangle *_parent)
 {
-    parent = _parent;
+	parent = _parent;
 }
 
 void ofxUIRectangle::setHeight(float _height)
 {
-    height = _height;
-    halfheight = height*.5;
+	height = _height;
+	halfheight = height*.5;
 }
 
 void ofxUIRectangle::setWidth(float _width)
 {
-    width = _width;
-    halfwidth = width*.5;
+	width = _width;
+	halfwidth = width*.5;
 }
 
 float ofxUIRectangle::getMinX() const
 {
-    return MIN(x, x + width);  // - width
+	return MIN(x, x + width);  // - width
 }
 
 float ofxUIRectangle::getMaxX() const
 {
-    return MAX(x, x + width);  // - width
+	return MAX(x, x + width);  // - width
 }
 
 float ofxUIRectangle::getMinY() const
 {
-    return MIN(y, y + height);  // - height
+	return MIN(y, y + height);  // - height
 }
 
 float ofxUIRectangle::getMaxY() const
 {
-    return MAX(y, y + height);  // - height
+	return MAX(y, y + height);  // - height
 }
 
 bool ofxUIRectangle::inside(ofPoint p)
 {
-    if(parent !=NULL)
-    {
-        return insideParent(p.x, p.y);
-    }
-    else
-    {
-        return insideChild(p.x, p.y);
-    }
+	if(parent !=NULL)
+	{
+		return insideParent(p.x, p.y);
+	}
+	else
+	{
+		return insideChild(p.x, p.y);
+	}
 }
 
 bool ofxUIRectangle::inside(float px, float py)
 {
-    if(parent != NULL)
-    {
-        return insideParent(px,py);
-    }
-    else
-    {
-        return insideChild(px,py);
-    }
+	if(parent != NULL)
+	{
+		return insideParent(px,py);
+	}
+	else
+	{
+		return insideChild(px,py);
+	}
 }
 
 bool ofxUIRectangle::insideChild(float px, float py)
 {
-    if( px > x && py > y && px < x + width && py < y + height ){
-        return true;
-    }
-    return false;
-    
+	if( px > x && py > y && px < x + width && py < y + height ){
+		return true;
+	}
+	return false;
+	
 }
 
 bool ofxUIRectangle::insideParent(float px, float py)
 {
-    if( px > (x+parent->getX()) && py > (y+parent->getY()) && px < (x+parent->getX()) + width && py < (y+parent->getY()) + height )
-    {
-        return true;
-    }
-    return false;
+	if( px > (x+parent->getX()) && py > (y+parent->getY()) && px < (x+parent->getX()) + width && py < (y+parent->getY()) + height )
+	{
+		return true;
+	}
+	return false;
 }
 
 ofxUIVec2f ofxUIRectangle::percentInside(float px, float py)				//Assumes your already inside rect
 {
-    if(parent != NULL)
-    {
-        return percentInsideParent(px,py);
-    }
-    else
-    {
-        return percentInsideChild(px,py);
-    }
+	if(parent != NULL)
+	{
+		return percentInsideParent(px,py);
+	}
+	else
+	{
+		return percentInsideChild(px,py);
+	}
 }
 
 ofxUIVec2f ofxUIRectangle::percentInsideChild(float px, float py)
 {
-    return ofxUIVec2f((px-x)/(width), (py-y)/(height));
+	return ofxUIVec2f((px-x)/(width), (py-y)/(height));
 }
 
 ofxUIVec2f ofxUIRectangle::percentInsideParent(float px, float py)
 {
-    return ofxUIVec2f((px-(x+parent->getX()))/(width), (py-(y+parent->getY()))/(height));
+	return ofxUIVec2f((px-(x+parent->getX()))/(width), (py-(y+parent->getY()))/(height));
 }
 
 void ofxUIRectangle::draw()
 {
-    if(parent != NULL)
-    {
-        ofxUIDrawRect(parent->getX()+x, parent->getY()+y, width, height);
-    }
-    else
-    {
-        ofxUIDrawRect(x,y,width,height);
-    }
+	if(parent != NULL)
+	{
+		ofxUIDrawRect(parent->getX()+x, parent->getY()+y, width, height);
+	}
+	else
+	{
+		ofxUIDrawRect(x,y,width,height);
+	}
 }
 
 float ofxUIRectangle::getX(bool recursive)
 {
-    if(parent != NULL && recursive)
-    {
-        return (x+parent->getX());
-    }
-    else
-    {
-        return x;
-    }
+	if(parent != NULL && recursive)
+	{
+		return (x+parent->getX());
+	}
+	else
+	{
+		return x;
+	}
 }
 
 float ofxUIRectangle::getY(bool recursive)
 {
-    if(parent != NULL && recursive)
-    {
-        return (y+parent->getY());
-    }
-    else
-    {
-        return y;
-    }
+	if(parent != NULL && recursive)
+	{
+		return (y+parent->getY());
+	}
+	else
+	{
+		return y;
+	}
 }
 
 float ofxUIRectangle::getWidth()
 {
-    return width;
+	return width;
 }
 
 float ofxUIRectangle::getHeight()
 {
-    return height;
+	return height;
 }
 
 float ofxUIRectangle::getHalfWidth()
 {
-    return halfwidth;
+	return halfwidth;
 }
 
 float ofxUIRectangle::getHalfHeight()
 {
-    return halfheight;
+	return halfheight;
 }
 
 float ofxUIRectangle::getRelativeMinX()
 {
-    return MIN(getX(), getX() + getWidth());    // - width
+	return MIN(getX(), getX() + getWidth());    // - width
 }
 
 float ofxUIRectangle::getRelativeMinY()
 {
-    return MIN(getY(), getY() + getHeight());   // - height
+	return MIN(getY(), getY() + getHeight());   // - height
 }
 
 float ofxUIRectangle::getRelativeMaxX()
 {
-    return MAX(getX(), getX() + getWidth());    // - width
+	return MAX(getX(), getX() + getWidth());    // - width
 }
 
 float ofxUIRectangle::getRelativeMaxY()
 {
-    return MAX(getY(), getY() + getHeight());   // - height
+	return MAX(getY(), getY() + getHeight());   // - height
 }
 
 bool ofxUIRectangle::rIntersects(const ofxUIRectangle& rect)
 {
-    return (getRelativeMinX() < rect.getMaxX() && getRelativeMaxX() > rect.getMinX() &&
-            getRelativeMinY() < rect.getMaxY() && getRelativeMaxY() > rect.getMinY());
+	return (getRelativeMinX() < rect.getMaxX() && getRelativeMaxX() > rect.getMinX() &&
+			getRelativeMinY() < rect.getMaxY() && getRelativeMaxY() > rect.getMinY());
 }
 
 bool ofxUIRectangle::rInside(const ofxUIRectangle& rect)
 {
-    return (getRelativeMinX() > rect.getMinX() && getRelativeMaxX() < rect.getMaxX() &&
-            getRelativeMinY() > rect.getMinY() && getRelativeMaxY() < rect.getMaxY());
+	return (getRelativeMinX() > rect.getMinX() && getRelativeMaxX() < rect.getMaxX() &&
+			getRelativeMinY() > rect.getMinY() && getRelativeMaxY() < rect.getMaxY());
+}
+
+ofRectangle ofxUIRectangle::getAbsoluteRect()
+{
+	ofRectangle R;
+	if(parent!=NULL)
+	{
+		R = parent->getAbsoluteRect();
+		R.x += x;
+		R.y += y;	
+		R.width = width;
+		R.height = height;
+	}
+	else
+	{
+		R=ofRectangle(x,y,width,height);		
+	}
+	return R;
 }

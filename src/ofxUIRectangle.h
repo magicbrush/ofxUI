@@ -77,7 +77,7 @@ public:
     
     bool rIntersects(const ofxUIRectangle& rect);
     bool rInside(const ofxUIRectangle& rect);
-
+	ofRectangle getAbsoluteRect();
     float x;
     float y;
     float width;
