@@ -135,7 +135,10 @@ bool ofxUIRectangle::inside(float px, float py)
 
 bool ofxUIRectangle::insideChild(float px, float py)
 {
-	if( px > x && py > y && px < x + width && py < y + height ){
+	if( px > x &&
+		py > y && 
+		px < x + width && 
+		py < y + height ){
 		return true;
 	}
 	return false;
@@ -144,14 +147,18 @@ bool ofxUIRectangle::insideChild(float px, float py)
 
 bool ofxUIRectangle::insideParent(float px, float py)
 {
-	if( px > (x+parent->getX()) && py > (y+parent->getY()) && px < (x+parent->getX()) + width && py < (y+parent->getY()) + height )
+	if( px > (x+parent->getX()) &&
+		py > (y+parent->getY()) && 
+		px < (x+parent->getX()) + width &&
+		py < (y+parent->getY()) + height )
 	{
 		return true;
 	}
 	return false;
 }
 
-ofxUIVec2f ofxUIRectangle::percentInside(float px, float py)				//Assumes your already inside rect
+ofxUIVec2f ofxUIRectangle::percentInside(float px, float py)				
+	//Assumes your already inside rect
 {
 	if(parent != NULL)
 	{
@@ -274,7 +281,7 @@ ofRectangle ofxUIRectangle::getAbsoluteRect()
 	}
 	else
 	{
-		R=ofRectangle(x,y,width,height);		
+		R.set(x,y,width,height);		
 	}
 	return R;
 }

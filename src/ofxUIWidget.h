@@ -47,10 +47,9 @@ public:
 	virtual void update();
 	virtual void draw();
 	
+	// add drawing skin in the following draw*() fcns
+	// 在下面的draw*()函数中增加了绘制皮肤的功能
 	virtual void drawBack();
-
-	void drawComponent( ofPtr<ofBaseDraws> &pDraw, ofxUIRectangle* r );
-
 	virtual void drawOutline();
 	virtual void drawOutlineHighlight();
 	virtual void drawFill();
@@ -184,6 +183,9 @@ public:
 	virtual void loadState(ofxXmlSettings *XML);
 	
 #endif
+
+private:
+	void drawComponent( ofPtr<ofBaseDraws> &pDraw, ofxUIRectangle* r );
 	
 protected:
 	ofxUIWidget *parent;
@@ -227,8 +229,11 @@ protected:
 #ifdef OFX_UI_TARGET_TOUCH       
 	int touchId;     
 #endif
-
+	// Ruimin Lyu -------------------------------------------------------------------//
 	//--------- skin ---------------//
+	// 增加了皮肤功能，
+	// 在之前所有的draw*()函数中增加了绘制皮肤的逻辑分支
+private:
 	ofPtr<ofBaseDraws> skin_padded;	
 	ofPtr<ofBaseDraws> skin_padded_outline;
 	ofPtr<ofBaseDraws> skin_back;	
@@ -250,5 +255,6 @@ public:
 	void set_skin_fill(ofPtr<ofBaseDraws> val) { skin_fill = val; }
 	ofPtr<ofBaseDraws> get_skin_fill_highlight() const { return skin_fill_highlight; }
 	void set_skin_fill_highlight(ofPtr<ofBaseDraws> val) { skin_fill_highlight = val; }
+	//---------------------------------------------------------------------- Ruimin Lyu //
 
 };

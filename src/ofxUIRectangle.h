@@ -29,62 +29,62 @@
 class ofxUIRectangle
 {
 public:
-    ofxUIRectangle();
-    ofxUIRectangle(float _x, float _y, float _w, float _h);
-    ofxUIRectangle(ofxUIRectangle const & r);
-    
-    void setParent(ofxUIRectangle *_parent);
-    
-    void set(float px, float py, float w, float h);
-    
-    void setX(float px);
-    float getX(bool recursive = true);
+	ofxUIRectangle();
+	ofxUIRectangle(float _x, float _y, float _w, float _h);
+	ofxUIRectangle(ofxUIRectangle const & r);
+	
+	void setParent(ofxUIRectangle *_parent);
+	
+	void set(float px, float py, float w, float h);
+	
+	void setX(float px);
+	float getX(bool recursive = true);
 
-    void setY(float py);
-    float getY(bool recursive = true);
-    
+	void setY(float py);
+	float getY(bool recursive = true);
+	
 	void setHeight(float _height);
-    float getWidth();
-    
+	float getWidth();
+	
 	void setWidth(float _width);
 	float getHeight();
-    
-    float getMinX() const;
-    float getMaxX() const;
-    
-    float getMinY() const;
-    float getMaxY() const;
-    
-    bool inside(ofPoint p);
-    bool inside(float px, float py);
-    bool insideChild(float px, float py);
-    bool insideParent(float px, float py);
 	
-    ofxUIVec2f percentInside(float px, float py);
+	float getMinX() const;
+	float getMaxX() const;
+	
+	float getMinY() const;
+	float getMaxY() const;
+	
+	bool inside(ofPoint p);
+	bool inside(float px, float py);
+	bool insideChild(float px, float py);
+	bool insideParent(float px, float py);
+	
+	ofxUIVec2f percentInside(float px, float py);
 	ofxUIVec2f percentInsideChild(float px, float py);
-    ofxUIVec2f percentInsideParent(float px, float py);
-    
-    void draw();
-    
-    float getHalfWidth();
+	ofxUIVec2f percentInsideParent(float px, float py);
+	
+	void draw();
+	
+	float getHalfWidth();
 	float getHalfHeight();
-    
-    float getRelativeMinX();
-    float getRelativeMinY();
-    
-    float getRelativeMaxX();
-    float getRelativeMaxY();
-    
-    bool rIntersects(const ofxUIRectangle& rect);
-    bool rInside(const ofxUIRectangle& rect);
+	
+	float getRelativeMinX();
+	float getRelativeMinY();
+	
+	float getRelativeMaxX();
+	float getRelativeMaxY();
+	
+	bool rIntersects(const ofxUIRectangle& rect);
+	bool rInside(const ofxUIRectangle& rect);
 	ofRectangle getAbsoluteRect();
-    float x;
-    float y;
-    float width;
-    float height;
+	float x;
+	float y;
+	float width;
+	float height;
 
 protected:
-    float halfwidth;
-    float halfheight;
-    ofxUIRectangle *parent; 
+	float halfwidth;
+	float halfheight;
+	ofxUIRectangle *parent; 
 };

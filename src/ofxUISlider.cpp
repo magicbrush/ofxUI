@@ -227,6 +227,7 @@ void ofxUISlider_<T>::drawBack()
         ofxUISetColor(color_back);
         rect->draw();
     }
+	ofxUIWidget::drawBack();
 }
 
 template<typename T>
