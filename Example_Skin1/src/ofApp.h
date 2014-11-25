@@ -4,7 +4,7 @@
 #include "ofxUI.h"
 
 class ofxSDRectFrame;
-class ofxSD3x3ScalableFrame;
+class ofxSDCornerEdgeFill;
 class ofxSDTile;
 
 class ofApp : public ofBaseApp{
@@ -61,7 +61,7 @@ public:
 	ofPtr<ofImage> IFill;
 	ofPtr<ofxSDTile> TileEdge;
 	ofPtr<ofxSDTile> TileFill;
-	ofPtr<ofxSD3x3ScalableFrame> SF;
+	ofPtr<ofxSDCornerEdgeFill> SF;
 
 	ofPtr<ofImage> TileFrame;
 	ofPtr<ofxSDRectFrame> RF;

@@ -12,7 +12,7 @@ void ofApp::setup(){
 	IFill->loadImage("Fill.jpg");
 	TileEdge.reset(new ofxSDTile(IEdge,true,false));
 	TileFill.reset(new ofxSDTile(IFill));
-	SF.reset(new ofxSD3x3ScalableFrame(
+	SF.reset(new ofxSDCornerEdgeFill(
 		ICorner,TileEdge,TileFill));
 		
 	ofSetCircleResolution(120);
