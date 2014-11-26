@@ -56,7 +56,7 @@ ofxUIImageButton::ofxUIImageButton(float w, float h, bool *_value, string _pathU
 
 void ofxUIImageButton::init(float x, float y, float w, float h, bool *_value, string _pathURL, string _name, int _size)
 {
-    initRect(0,0,w,h);
+    initRect(x,y,w,h);
     name = string(_name);
     kind = OFX_UI_WIDGET_IMAGEBUTTON;
     
