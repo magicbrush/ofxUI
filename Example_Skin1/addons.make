@@ -1,3 +1,0 @@
-ofxXmlSettings
-ofxScalableDraws
-ofxUI
